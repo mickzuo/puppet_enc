@@ -14,7 +14,7 @@ if sys.path.count(os.environ['_BASIC_PATH_'] + '/lib') == 0:
 
 from db import mydb 
 
-dic={'classes':{'nginx_new':''},'parameters': {'host': 'news_int','path':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin','hehe':'test','puppetserver':'puppet.500boss.com'},'environment':'production'}
+dic={'classes':{},'parameters': {'path':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin','puppetserver':'puppet.500boss.com'},'environment':'production'}
 #yam="""
 #classes: 
 #  nginx_new:
@@ -27,7 +27,6 @@ class MainHandler(tornado.web.RequestHandler):
         puppet_db=mydb()
         node=self.get_argument('node')
         r=puppet_db.getnodeclass(node)
-        print "hello python!"
         print r
         self.write(r)
         
