@@ -19,13 +19,17 @@ class mydb(object):
             return __pool.connection()
 
     def getnodeclass(self,node):
-        dic={'classes':'','parameters': {'host': 'news_int','path':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin','puppetserver':'puppet.500boss.com'},'environment':'production'}
-        SQL="select class_name from class where class_group in (select class_group from class_to_node where node_group in (select node_group from nodes where hostname=\'"+node+"\'));"
+        dic={'classes':'','parameters': {'host': '','path':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'},'environment':'production'}
+        SQL="select node_group from nodes where hostname=\'"+node+"\';"
+        self._cursor.execute(SQL)
+        node_group = self._cursor.fetchall()[0][0]
+        SQL="select class_name from class where class_group in (select class_group from class_to_node where node_group=\'"+node_group+"\');"
         count=self._cursor.execute(SQL)
         result=self._cursor.fetchall()
         class_dic={}
         for i in range(len(result)) :
             class_dic[result[i][0]]=''
         dic['classes']=class_dic
+        dic['parameters']['host']=node_group
         yam=ruamel.yaml.dump(dic,Dumper=ruamel.yaml.RoundTripDumper)
         return yam
