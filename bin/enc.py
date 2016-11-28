@@ -34,7 +34,8 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         puppet_db=mydb()
         node=self.get_argument('node')
-        r=puppet_db.getnodeclass(node)
+        r=puppet_db.getnodeclass(node.replace('.500x.com',''))
+        #r=puppet_db.getnodeclass(node)
         self.write(r)
         
 application = tornado.web.Application([
