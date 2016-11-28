@@ -38,3 +38,12 @@ class mydb(object):
         dic['parameters']['location']=location
         yam=ruamel.yaml.dump(dic,Dumper=ruamel.yaml.RoundTripDumper)
         return yam
+
+    def get_machine_list(self):
+        lst = []
+        SQL="select hostname,ip,node_group from nodes;"
+        self._cursor.execute(SQL)
+        result=self._cursor.fetchall()
+        for i in range(len(result)):
+           lst.append({'hostname':result[i][0],'ip':result[i][1],'group':result[i][2]}) 
+        return lst
