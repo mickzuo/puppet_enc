@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import tornado.ioloop
 import tornado.web
 import ruamel.yaml
@@ -27,7 +29,6 @@ class MainHandler(tornado.web.RequestHandler):
         puppet_db=mydb()
         node=self.get_argument('node')
         r=puppet_db.getnodeclass(node)
-        print r
         self.write(r)
         
 application = tornado.web.Application([
