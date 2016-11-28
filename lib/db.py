@@ -15,7 +15,7 @@ class mydb(object):
     def __getConn():
         if mydb.__pool is None:
             dbstring = getDbconfig()
-            __pool = PooledDB(MySQLdb,5,host=dbstring['host'],user=dbstring['username'],passwd=dbstring['password'],db=dbstring['dbname'],port=int(dbstring['port']))
+            __pool = PooledDB(MySQLdb,20,host=dbstring['host'],user=dbstring['username'],passwd=dbstring['password'],db=dbstring['dbname'],port=int(dbstring['port']))
             return __pool.connection()
 
     def getnodeclass(self,node):
