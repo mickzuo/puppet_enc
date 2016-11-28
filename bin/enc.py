@@ -2,9 +2,15 @@
 
 import tornado.ioloop
 import tornado.web
+import tornado.httpserver
 import ruamel.yaml
 import os
 import sys
+import tornado.options
+
+from tornado.options import options, define
+define("port",default=8888,help="running on 8888",type=int)
+
 
 if not os.environ.has_key('_BASIC_PATH_'):
     _BASIC_PATH_ = os.path.abspath(__file__)
@@ -36,7 +42,10 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    application.listen(8888)
+    tornado.options.parse_command_line()
+    http_server = tornado.httpserver.HTTPServer(application)
+    http_server.bind(options.port)
+    http_server.start(0)
     tornado.ioloop.IOLoop.instance().start()
 
 
