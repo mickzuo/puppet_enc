@@ -23,6 +23,8 @@ class mydb(object):
         SQL="select node_group,location from nodes where hostname=\'"+node+"\';"
         self._cursor.execute(SQL)
         nodeinfo = self._cursor.fetchall()
+	if len(nodeinfo)==0:
+		return 'node not defined!'
 	node_group=nodeinfo[0][0]
 	location=nodeinfo[0][1]
         SQL="select class_name from class where class_group in (select class_group from class_to_node where node_group=\'"+node_group+"\');"
