@@ -56,15 +56,15 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             <h4 class="modal-title" id="myModalLabel">新增节点</h4>
                                         </div>
-                                        <form role="form" method="post" action="/pages/tables.html">
+                                        <form role="form" id="addnodeform" method="post" action="/api/add_node">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>主机名</label>
-                                                    <input class="form-control">
+                                                    <input class="form-control" name="hostname">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>节点组</label>
-                                                    <select class="form-control">
+                                                    <select class="form-control" name="node_group">
                                                         {% for node_group in all_node_groups %}
                                                         <option>{{ node_group }}</option>
                                                         {% end %}
@@ -210,6 +210,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../static/dist/js/sb-admin-2.js"></script>
+    <!-- add node post data -->
+    <script src="../static/js/node.js"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>

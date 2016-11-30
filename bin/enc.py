@@ -61,9 +61,19 @@ class TableHandler(tornado.web.RequestHandler):
         #self.render("tables.html",machines=({'hostname':'dddd','ip':'testet'},{'hostname':'dfdaf','ip':'etwqtq'}))
         self.render("tables.html",machines=puppet_db.get_machine_list(),all_node_groups=puppet_db.get_all_node_groups())
         
+
+class ApiAddnode(tornado.web.RequestHandler):
+    def post(self):
+        #logger.debug('testtest')
+        hostname=self.get_argument('hostname')
+        node_group=self.get_argument('node_group')
+        self.write(hostname+node_group)
+        #print who
+
+
 application = tornado.web.Application(
 [
-    (r"/",MainHandler),(r"/pages/tables.html",TableHandler),(r"/pages/(.*)",AdminHandler)
+    (r"/",MainHandler),(r"/pages/tables.html",TableHandler),(r"/pages/(.*)",AdminHandler),(r"/api/add_node",ApiAddnode)
 ],**settings
 )
 
