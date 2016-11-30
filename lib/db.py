@@ -56,3 +56,22 @@ class mydb(object):
         for i in range(len(result)):
            lst.append(result[i][0]) 
         return lst
+
+    def add_node(self,hostname,node_group):
+        SQL="insert into nodes (hostname,node_group) values (\'"+hostname+"\',\'"+node_group+"\');"
+        try:
+            self._cursor.execute(SQL)
+            self._conn.commit()
+        except Exception,ex:
+            self._conn.rollback()
+            print Exception,":",ex
+            return "Add node "+hostname+" failed!"
+        return self.__getInsertId(hostname)
+
+    def __getInsertId(self,hostname):
+        self._cursor.execute("SELECT * from nodes where hostname=\'"+hostname+"\';")
+        result=self._cursor.fetchall()
+        print result
+        if len(result)==0:
+            return "Add node "+hostname+" failed!"
+        return "Add node "+hostname+" success!"

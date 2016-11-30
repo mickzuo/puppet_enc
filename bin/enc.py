@@ -64,11 +64,8 @@ class TableHandler(tornado.web.RequestHandler):
 
 class ApiAddnode(tornado.web.RequestHandler):
     def post(self):
-        #logger.debug('testtest')
-        hostname=self.get_argument('hostname')
-        node_group=self.get_argument('node_group')
-        self.write(hostname+node_group)
-        #print who
+        puppet_db=mydb()
+        self.write(puppet_db.add_node(self.get_argument('hostname'),self.get_argument('node_group')))
 
 
 application = tornado.web.Application(
