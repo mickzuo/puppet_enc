@@ -59,7 +59,7 @@ class TableHandler(tornado.web.RequestHandler):
         puppet_db=mydb()
         #machines=puppet_db.get_machine_list()
         #self.render("tables.html",machines=({'hostname':'dddd','ip':'testet'},{'hostname':'dfdaf','ip':'etwqtq'}))
-        self.render("tables.html",machines=puppet_db.get_machine_list())
+        self.render("tables.html",machines=puppet_db.get_machine_list(),all_node_groups=puppet_db.get_all_node_groups())
         
 application = tornado.web.Application(
 [

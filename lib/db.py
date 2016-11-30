@@ -47,3 +47,12 @@ class mydb(object):
         for i in range(len(result)):
            lst.append({'hostname':result[i][0],'ip':result[i][1],'group':result[i][2]}) 
         return lst
+
+    def get_all_node_groups(self):
+        lst = []
+        SQL="select node_group from nodes group by node_group;;"
+        self._cursor.execute(SQL)
+        result=self._cursor.fetchall()
+        for i in range(len(result)):
+           lst.append(result[i][0]) 
+        return lst
