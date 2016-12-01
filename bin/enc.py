@@ -67,10 +67,14 @@ class ApiAddnode(tornado.web.RequestHandler):
         puppet_db=mydb()
         self.write(puppet_db.add_node(self.get_argument('hostname'),self.get_argument('node_group')))
 
+class ApiDelnode(tornado.web.RequestHandler):
+    def post(self):
+        puppet_db=mydb()
+        self.write(puppet_db.delnode(self.get_argument('node')))
 
 application = tornado.web.Application(
 [
-    (r"/",MainHandler),(r"/pages/tables.html",TableHandler),(r"/pages/(.*)",AdminHandler),(r"/api/add_node",ApiAddnode)
+    (r"/",MainHandler),(r"/pages/tables.html",TableHandler),(r"/pages/(.*)",AdminHandler),(r"/api/add_node",ApiAddnode),(r"/api/delnode",ApiDelnode)
 ],**settings
 )
 

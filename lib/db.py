@@ -75,3 +75,14 @@ class mydb(object):
         if len(result)==0:
             return "Add node "+hostname+" failed!"
         return "Add node "+hostname+" success!"
+
+    def delnode(self,hostname):
+        SQL="delete from nodes where hostname=\'"+hostname+"\';"
+        try:
+            self._cursor.execute(SQL)
+            self._conn.commit()
+        except Exception,ex:
+            self._conn.rollback()
+            print Exception,":",ex
+            return "Del node "+hostname+" failed!"
+        return "success"
