@@ -10,3 +10,13 @@ $('#addnodeform').submit(function (event) {
         fail:function(){ alert('增加节点失败');}
     });
 });
+
+function delnode(hostname){
+    $.ajax({
+        type:'post',
+        url:'/api/delnode',
+        data:'node='+hostname,
+        success:function(hostname){ alert('delete node '+hostnmae+' success!')},
+        error:function(){ alert('failed!'); }
+    });
+}

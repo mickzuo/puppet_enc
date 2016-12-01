@@ -110,7 +110,7 @@
                                                 {{ machine['hostname'] }} <i class="fa fa-caret-down"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-user">
-                                                <li><a href="#"><i class="fa fa-times fa-fw"></i> 删除该节点</a></li>
+                                                <li><a id="{{ machine['hostname'] }}" href="javascript:delnode('{{ machine['hostname'] }}')"><i class="fa fa-times fa-fw"></i> 删除该节点</a></li>
                                                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> 更改节点组</a></li>
                                             </ul>
                                         
