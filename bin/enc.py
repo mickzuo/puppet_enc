@@ -59,7 +59,7 @@ class TableHandler(tornado.web.RequestHandler):
         puppet_db=mydb()
         #machines=puppet_db.get_machine_list()
         #self.render("tables.html",machines=({'hostname':'dddd','ip':'testet'},{'hostname':'dfdaf','ip':'etwqtq'}))
-        self.render("tables.html",machines=puppet_db.get_machine_list(),all_node_groups=puppet_db.get_all_node_groups())
+        self.render("nodes.html",machines=puppet_db.get_machine_list(),all_node_groups=puppet_db.get_all_node_groups())
         
 
 class ApiAddnode(tornado.web.RequestHandler):
@@ -74,7 +74,7 @@ class ApiDelnode(tornado.web.RequestHandler):
 
 application = tornado.web.Application(
 [
-    (r"/",MainHandler),(r"/pages/tables.html",TableHandler),(r"/pages/(.*)",AdminHandler),(r"/api/add_node",ApiAddnode),(r"/api/delnode",ApiDelnode)
+    (r"/",MainHandler),(r"/pages/nodes.html",TableHandler),(r"/pages/(.*)",AdminHandler),(r"/api/add_node",ApiAddnode),(r"/api/delnode",ApiDelnode)
 ],**settings
 )
 
