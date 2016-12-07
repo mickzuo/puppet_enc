@@ -18,7 +18,7 @@ function delnode(hostname){
         type:'post',
         url:'/api/delnode',
         data:'node='+node,
-        success:function(){ alert('delete node '+node+' success!')},
+        success:function(){ $('#myModalok').modal('show') },
         error:function(){ alert('failed!'); }
     });
 }
