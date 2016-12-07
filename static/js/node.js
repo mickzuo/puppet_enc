@@ -1,7 +1,7 @@
 $('#addnodeform').submit(function (event) {
     event.preventDefault();
     var form = $(this);
-
+    $('#myModal').modal('hide');
     $.ajax({
         type:form.attr('method'),
         url:form.attr('action'),
@@ -12,11 +12,15 @@ $('#addnodeform').submit(function (event) {
 });
 
 function delnode(hostname){
+    var node = hostname
+    $('#myModalnode'+node).modal('hide');
     $.ajax({
         type:'post',
         url:'/api/delnode',
-        data:'node='+hostname,
-        success:function(hostname){ alert('delete node '+hostnmae+' success!')},
+        data:'node='+node,
+        success:function(){ alert('delete node '+node+' success!')},
         error:function(){ alert('failed!'); }
     });
 }
+
+
