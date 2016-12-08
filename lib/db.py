@@ -86,3 +86,24 @@ class mydb(object):
             print Exception,":",ex
             return "Del node "+hostname+" failed!"
         return "success"
+
+    def getnodetoclass(self):
+        nodedic={}
+        classes={}
+
+        SQL="select * from class;"
+        self._cursor.execute(SQL)
+        result=self._cursor.fetchall()
+        for theclass in result:
+            if not classes.has_key(theclass[1]):
+                classes[theclass[1]]=[]
+            classes[theclass[1]].append(theclass[0])
+
+        SQL="select * from class_to_node;"
+        self._cursor.execute(SQL)
+        result=self._cursor.fetchall()
+        for node_group in result:
+            if not nodedic.has_key(node_group[0]):
+                nodedic[node_group[0]]=[]
+            nodedic[node_group[0]].append({node_group[1]:classes[node_group[1]]})
+        return nodedic
