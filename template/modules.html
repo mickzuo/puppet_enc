@@ -41,40 +41,149 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Typography</h1>
+                    <h1 class="page-header">Puppet模块</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Lists
+            {%set i=1 %}
+            {% if len(classes)%4 > 0  %}
+                {% set count4=len(classes)/4+1 %}
+            {% else %}
+                {% set count4=len(classes)/4 %}
+            {% end %}
+            <div class="col-lg-3" >
+            {% while i <= count4 %}
+                {% set node_group=classes.popitem() %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ node_group[0] }}
+                            </div>
+                            <div class="panel-body">
+                                <h4>模块列表</h4>
+                                <ul>
+                                    {% for class_group in node_group[1] %}
+                                    <li>{{ class_group.keys()[0] }}
+                                        <ul>
+                                            {% for module in class_group.values()[0]%}
+                                            <li>{{ module }}</li>
+                                            {% end %}
+                                        </ul>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                            <!-- /.panel-body -->
                         </div>
-                        <div class="panel-body">
-                            <h4>Unordered List</h4>
-                            <ul>
-                                <li>List Item</li>
-                                <li>List Item</li>
-                                <li>
-                                    <ul>
-                                        <li>List Item</li>
-                                        <li>List Item</li>
-                                        <li>List Item</li>
-                                    </ul>
-                                </li>
-                                <li>List Item</li>
-                            </ul>
+                        <!-- /.panel -->
+                    <!-- /.col-lg-4 -->
+            {%  set i=i+1 %}
+            {% end %}
+            </div>
+            {%set i=1 %}
+            {% if len(classes)%3 > 0  %}
+                {% set count3=len(classes)/3+1 %}
+            {% else %}
+                {% set count3=len(classes)/3 %}
+            {% end %}
+
+
+            <div class="col-lg-3" >
+            {% while i <= count3 %}
+                {% set node_group=classes.popitem() %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ node_group[0] }}
+                            </div>
+                            <div class="panel-body">
+                                <h4>模块列表</h4>
+                                <ul>
+                                    {% for class_group in node_group[1] %}
+                                    <li>{{ class_group.keys()[0] }}
+                                        <ul>
+                                            {% for module in class_group.values()[0]%}
+                                            <li>{{ module }}</li>
+                                            {% end %}
+                                        </ul>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                            <!-- /.panel-body -->
                         </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-4 -->
+                        <!-- /.panel -->
+                    <!-- /.col-lg-4 -->
+            {%  set i=i+1 %}
+            {% end %}
+            </div>
+
+            {%set i=1 %}
+            {% if len(classes)%2 > 0  %}
+                {% set count2=len(classes)/2+1 %}
+            {% else %}
+                {% set count2=len(classes)/2 %}
+            {% end %}
+            <div class="col-lg-3" >
+            {% while i <= count2 %}
+                {% set node_group=classes.popitem() %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ node_group[0] }}
+                            </div>
+                            <div class="panel-body">
+                                <h4>模块列表</h4>
+                                <ul>
+                                    {% for class_group in node_group[1] %}
+                                    <li>{{ class_group.keys()[0] }}
+                                        <ul>
+                                            {% for module in class_group.values()[0]%}
+                                            <li>{{ module }}</li>
+                                            {% end %}
+                                        </ul>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    <!-- /.col-lg-4 -->
+            {%  set i=i+1 %}
+            {% end %}
+            </div>
+
+            {%set i=1 %}
+            {% set count1=len(classes) %}
+            <div class="col-lg-3" >
+            {% while i <= count1 %}
+                {% set node_group=classes.popitem() %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ node_group[0] }}
+                            </div>
+                            <div class="panel-body">
+                                <h4>模块列表</h4>
+                                <ul>
+                                    {% for class_group in node_group[1] %}
+                                    <li>{{ class_group.keys()[0] }}
+                                        <ul>
+                                            {% for module in class_group.values()[0]%}
+                                            <li>{{ module }}</li>
+                                            {% end %}
+                                        </ul>
+                                    </li>
+                                    {% end %}
+                                </ul>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    <!-- /.col-lg-4 -->
+            {%  set i=i+1 %}
+            {% end %}
             </div>
             <!-- /.row -->
-                    </div>
+        </div>
         <!-- /#page-wrapper -->
 
     </div>
@@ -91,7 +200,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../static/dist/js/sb-admin-2.js"></script>
-
 </body>
 
 </html>
