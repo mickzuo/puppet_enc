@@ -107,3 +107,16 @@ class mydb(object):
                 nodedic[node_group[0]]=[]
             nodedic[node_group[0]].append({node_group[1]:classes[node_group[1]]})
         return nodedic
+
+    def getclass(self):
+        classes={}
+
+        SQL="select * from class;"
+        self._cursor.execute(SQL)
+        result=self._cursor.fetchall()
+        for theclass in result:
+            if not classes.has_key(theclass[1]):
+                classes[theclass[1]]=[]
+            classes[theclass[1]].append(theclass[0])
+
+        return classes

@@ -75,7 +75,7 @@ class ApiDelnode(tornado.web.RequestHandler):
 class ModulesHandler(tornado.web.RequestHandler):
     def get(self):
         puppet_db=mydb()
-        self.render("modules.html",classes=puppet_db.getnodetoclass())
+        self.render("modules.html",classes=puppet_db.getnodetoclass(),allclass=puppet_db.getclass())
 
 application = tornado.web.Application(
 [
