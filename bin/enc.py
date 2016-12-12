@@ -22,7 +22,7 @@ if sys.path.count(os.environ['_BASIC_PATH_'] + '/lib') == 0:
 settings = {
     "static_path" : os.path.join(os.environ['_BASIC_PATH_'],"static"),
     "template_path" : os.path.join(os.environ['_BASIC_PATH_'],"template"),
-    "debug" : False,
+    "debug" : True,
 }
 
 print settings
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(application)
     http_server.bind(options.port)
-    http_server.start(0)
+    http_server.start(1)
     tornado.ioloop.IOLoop.instance().start()
 
 
