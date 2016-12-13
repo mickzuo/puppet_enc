@@ -67,10 +67,22 @@ class ApiAddnode(tornado.web.RequestHandler):
         puppet_db=mydb()
         self.write(puppet_db.add_node(self.get_argument('hostname'),self.get_argument('node_group')))
 
+class ApiAddmodule(tornado.web.RequestHandler):
+    def post(self):
+        puppet_db=mydb()
+        self.write(puppet_db.add_module(self.get_argument('classname'),self.get_argument('class_group')))
+
+
 class ApiDelnode(tornado.web.RequestHandler):
     def post(self):
         puppet_db=mydb()
         self.write(puppet_db.delnode(self.get_argument('node')))
+
+class ApiDelmodule(tornado.web.RequestHandler):
+    def post(self):
+        puppet_db=mydb()
+        self.write(puppet_db.delmodule(self.get_argument('module')))
+
 
 class ModulesHandler(tornado.web.RequestHandler):
     def get(self):
@@ -79,7 +91,7 @@ class ModulesHandler(tornado.web.RequestHandler):
 
 application = tornado.web.Application(
 [
-    (r"/",MainHandler),(r"/pages/nodes.html",TableHandler),(r"/api/add_node",ApiAddnode),(r"/api/delnode",ApiDelnode),(r"/pages/modules.html",ModulesHandler),(r"/pages/(.*)",AdminHandler)
+    (r"/",MainHandler),(r"/pages/nodes.html",TableHandler),(r"/api/add_node",ApiAddnode),(r"/api/delnode",ApiDelnode),(r"/pages/modules.html",ModulesHandler),(r"/pages/(.*)",AdminHandler),(r"/api/delmodule",ApiDelmodule),(r"/api/add_module",ApiAddmodule)
 ],**settings
 )
 

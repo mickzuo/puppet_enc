@@ -66,15 +66,39 @@ class mydb(object):
             self._conn.rollback()
             print Exception,":",ex
             return "Add node "+hostname+" failed!"
-        return self.__getInsertId(hostname)
+        return self.__getnodeInsertId(hostname)
 
-    def __getInsertId(self,hostname):
+    def add_module(self,module,module_group):
+        SQL1="insert into class (class_name,class_group) values (\'"+module+"\',\'"+module+"\');"
+        SQL2="insert into class (class_name,class_group) values (\'"+module+"\',\'"+module_group+"\');"
+        if module_group == "nogroup":
+            SQL2=";"
+        try:
+            self._cursor.execute(SQL1)
+            self._cursor.execute(SQL2)
+            self._conn.commit()
+        except Exception,ex:
+            self._conn.rollback()
+            print Exception,":",ex
+            return "Add module "+module+" failed!"
+        return self.__getmoduleInsertId(module)
+
+    def __getnodeInsertId(self,hostname):
         self._cursor.execute("SELECT * from nodes where hostname=\'"+hostname+"\';")
         result=self._cursor.fetchall()
         print result
         if len(result)==0:
             return "Add node "+hostname+" failed!"
         return "Add node "+hostname+" success!"
+
+    def __getmoduleInsertId(self,module):
+        self._cursor.execute("SELECT * from class where class_name=\'"+module+"\';")
+        result=self._cursor.fetchall()
+        print result
+        if len(result)==0:
+            return "Add module "+module+" failed!"
+        return "Add module "+module+" success!"
+
 
     def delnode(self,hostname):
         SQL="delete from nodes where hostname=\'"+hostname+"\';"
@@ -85,6 +109,19 @@ class mydb(object):
             self._conn.rollback()
             print Exception,":",ex
             return "Del node "+hostname+" failed!"
+        return "success"
+
+    def delmodule(self,module):
+        SQL1="delete from class where class_name=\'"+module+"\';"
+        SQL2="delete from class_to_node where class_group=\'"+module+"\';"
+        try:
+            self._cursor.execute(SQL1)
+            self._cursor.execute(SQL2)
+            self._conn.commit()
+        except Exception,ex:
+            self._conn.rollback()
+            print Exception,":",ex
+            return "Del module "+module+" failed!"
         return "success"
 
     def getnodetoclass(self):
